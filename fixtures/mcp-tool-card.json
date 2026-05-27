@@ -1,0 +1,30 @@
+{
+  "tool_card_version": "0.1",
+  "tool": {
+    "server_id": "research-mcp",
+    "name": "delete-document",
+    "version": "1.0.0",
+    "mcp_server_uri": "https://example.com/mcp/research",
+    "description": "Permanently remove an indexed document and its embeddings."
+  },
+  "schema": {
+    "input_schema_inline": {
+      "type": "object",
+      "properties": { "doc_id": { "type": "string" } },
+      "required": ["doc_id"]
+    }
+  },
+  "safety": {
+    "side_effect_class": "destructive",
+    "reversible": false,
+    "rate_limited": true,
+    "pii_exposure": "medium",
+    "secrets_exposure": "none",
+    "human_approval_required": true,
+    "refusal_modes": ["legal-hold"]
+  },
+  "tested_with": [
+    { "provider": "openai", "model": "gpt-4o-mini", "passed": true }
+  ],
+  "audit": { "log_locations": ["s3://research-audit/destructive/"], "retention_days": 365 }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "kg-suite-pr-gate-action",
+  "version": "0.1.0",
+  "description": "Single PR-gate GitHub Action that auto-routes every changed Kinetic Gain Suite document in a PR to the right per-protocol diff via kg-protocol-detect. One workflow step, one consolidated PR comment, all 5 protocols (AgentCard / MCP Tool Card / prompt-provenance / evidence-bundle / OTel GenAI rollup) covered.",
+  "type": "module",
+  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "author": "mizcausevic-dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mizcausevic-dev/kg-suite-pr-gate-action"
+  },
+  "keywords": [
+    "github-action",
+    "actions",
+    "kinetic-gain-suite",
+    "ai-governance",
+    "pr-gate",
+    "breaking-change-detection",
+    "a2a",
+    "mcp",
+    "otel-genai",
+    "evidence-bundle",
+    "prompt-provenance",
+    "typescript"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.0",
+    "@vitest/coverage-v8": "^2.1.8",
+    "eslint": "^9.17.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.0",
+    "vitest": "^2.1.8"
+  }
+}

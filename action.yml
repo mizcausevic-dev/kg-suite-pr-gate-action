@@ -1,0 +1,49 @@
+name: "Kinetic Gain Suite PR Gate"
+description: "Single PR-gate Action that auto-routes every changed Kinetic Gain Suite document (AgentCard / MCP Tool Card / prompt-provenance / evidence-bundle / OTel GenAI rollup) to the right per-protocol diff via kg-protocol-detect, then aggregates results into one structured PR comment and one consolidated breaking/non-breaking exit code."
+author: "mizcausevic-dev"
+branding:
+  icon: "shield"
+  color: "purple"
+
+inputs:
+  scan-dir:
+    description: "Directory to scan recursively for changed JSON files. Defaults to '.' (entire repo)."
+    required: false
+    default: "."
+  base-sha:
+    description: "Override the base SHA used to retrieve previous versions. Defaults to pull_request.base.sha."
+    required: false
+  comment-on-pr:
+    description: "Post the aggregated Markdown diff as a PR comment. 'auto' (default) posts only on pull_request events."
+    required: false
+    default: "auto"
+  fail-on-breaking:
+    description: "Fail the run when ANY changed Suite doc has a BREAKING diff (default 'true')."
+    required: false
+    default: "true"
+  fail-on-any-change:
+    description: "Fail the run when ANY changed Suite doc has any diff at all (default 'false')."
+    required: false
+    default: "false"
+  otel-genai-threshold:
+    description: "Threshold for OTel GenAI rollup diffs (0..1). Default '0.10' (10%)."
+    required: false
+    default: "0.10"
+  github-token:
+    description: "Token used to post the PR comment (defaults to GITHUB_TOKEN)."
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  breaking:
+    description: "True iff ANY changed Suite doc has a BREAKING diff."
+  change-count:
+    description: "Total number of detected changes across all routed Suite docs."
+  file-count:
+    description: "Number of changed Suite doc files that were diffed."
+  unknown-count:
+    description: "Number of changed JSON files that did not match any Suite protocol (routed to 'unknown')."
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
