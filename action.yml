@@ -1,5 +1,5 @@
 name: "Kinetic Gain Suite PR Gate"
-description: "Single PR-gate Action that auto-routes every changed Kinetic Gain Suite document (AgentCard / MCP Tool Card / prompt-provenance / evidence-bundle / OTel GenAI rollup) to the right per-protocol diff via kg-protocol-detect, then aggregates results into one structured PR comment and one consolidated breaking/non-breaking exit code."
+description: "One PR-gate Action for all 5 Kinetic Gain Suite protocols — auto-routes changed docs, posts one comment."
 author: "mizcausevic-dev"
 branding:
   icon: "shield"
